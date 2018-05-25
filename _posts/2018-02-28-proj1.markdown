@@ -1,0 +1,113 @@
+---
+layout: post
+title:  "First Project - Pokemon"
+date:   2018-02-28
+author: Chenghan Yang
+categories: Python
+tags:	python pokemon
+cover:  "/assets/proj1_cover.jpg"
+---
+
+The data science course started with introducing us to Python, one of the most popular programming languages in the data science sector.
+
+Our first assignment was an exercise to check our proficiency in Python and with different data types (list, dictionary, array etc) and use of command structures (if else statement, for loops). The background story for this assignment is about creating a database for Pokemon characters, the assignment question starts like this:
+
+_You are an analyst at a “scrappy” online gaming company that specializes in remakes of last year’s fads._
+_Your boss, who runs the product development team, is convinced that Pokemon Go's fatal flaw was that you had to actually move around outside. She has design mock-ups for a new game called Pokemon Stay: in this version players still need to move, but just from website to website. Pokemon gyms are now popular online destinations, and catching Pokemon in the "wild" simply requires browsing the internet for hours in the comfort of your home._
+_She wants you to program a prototype version of the game, and analyze the planned content to help the team calibrate the design._
+
+Looking back, this assignment was so basic and simple, there is only one question that I would like to highlight and share. It was to challenge our command of the list comprehension in Python.
+
+The question started by asking us to parse raw text data into a ‘matrix’ (technically a list of lists) using for loops to remove quotes from each item, convert certain columns into numeric float data values and insert the value -1 for cells that are empty.
+
+This is how the first few rows of the raw data looked like:
+```"PokedexNumber","Name","Type","Total","HP","Attack","Defense","SpecialAttack","SpecialDefense","Speed"
+"001","Bulbasaur","GrassPoison","318","45","49","49","65","65","45"
+"002","Ivysaur","GrassPoison","405","60","62","63","80","80","60"
+```
+
+The parsed outcome should be like this:
+```['PokedexNumber', 'Name', 'Type', 'Total', 'HP', 'Attack', 'Defense', 'SpecialAttack', 'SpecialDefense', 'Speed']
+[1.0, 'Bulbasaur', 'GrassPoison', 318.0, 45.0, 49.0, 49.0, 65.0, 65.0, 45.0]
+[2.0, 'Ivysaur', 'GrassPoison', 405.0, 60.0, 62.0, 63.0, 80.0, 80.0, 60.0]
+```
+
+The first part of the question wasn’t such a difficult exercise, we simply had to use a combination of if-else statements with nested for-loops. However, the second part of the question challenged us to achieve the same output with only a single list comprehension!
+
+This was my answer:
+```output = [[cell if col_index==1 or col_index==2 else -1 if cell=='' else float(cell) for col_index, cell in enumerate(row)] if row_index <> 0 else row for row_index, row in enumerate(i.replace('"','').replace('\n', '').split(',') for i in raw_pd)]
+```
+
+The above code is pretty impossible to read and my point isn’t to show off my coding skill but to share what I feel is a very important and useful advice from our instructor, Edoardo (Edo for short).
+
+Edo told us that we should always start off with performing simple executions and slowly build it up. Later on, he extended this advice towards building models: use an iterative approach, build a simple model, get it to work and then gradually improve it.
+
+This piece of advice from him is so helpful for me to handle any tough problem by first breaking it down into simple steps that are easier to manage.
+
+To conclude this post, I could only produce the above single line list comprehension by building it up over 6 steps of code.
+
+
+You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+
+## Adding New Posts
+
+To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+
+### Tags and Categories
+
+If you list one or more categories or tags in the front matter of your post, they will be included with the post on the page as links. Clicking the link will bring you to an auto-generated archive page for the category or tag, created using the [jekyll-archive][jekyll-archive] gem.
+
+### Cover Images
+
+To add a cover image to your post, set the "cover" property in the front matter with the relative URL of the image (i.e. <code>cover: "/assets/cover_image.jpg"</code>).
+
+### Code Snippets
+
+You can use [highlight.js][highlight] to add syntax highlight code snippets:
+
+Use the [Liquid][liquid] `{% raw %}{% highlight <language> %}{% endraw %}` tag to add syntax highlighting to code snippets.
+
+For instance, this template...
+{% highlight html %}
+{% raw %}{% highlight javascript %}    
+function demo(string, times) {    
+  for (var i = 0; i < times; i++) {    
+    console.log(string);    
+  }    
+}    
+demo("hello, world!", 10);
+{% endhighlight %}{% endraw %}
+{% endhighlight %}
+
+...will come out looking like this:
+
+{% highlight javascript %}
+function demo(string, times) {
+  for (var i = 0; i < times; i++) {
+    console.log(string);
+  }
+}
+demo("hello, world!", 10);
+{% endhighlight %}
+
+Syntax highlighting is done using [highlight.js][highlight]. You can change the active theme in [head.html](https://github.com/bencentra/centrarium/blob/2dcd73d09e104c3798202b0e14c1db9fa6e77bc7/_includes/head.html#L15).
+
+### Images
+
+Lightbox has been enabled for images. To create the link that'll launch the lightbox, add <code>data-lightbox</code> and <code>data-title</code> attributes to an <code>&lt;a&gt;</code> tag around your <code>&lt;img&gt;</code> tag. The result is:
+
+<a href="//bencentra.com/assets/images/falcon9_large.jpg" data-lightbox="falcon9-large" data-title="Check out the Falcon 9 from SpaceX">
+  <img src="//bencentra.com/assets/images/falcon9_small.jpg" title="Check out the Falcon 9 from SpaceX">
+</a>
+
+For more information, check out the [Lightbox][lightbox] website.
+
+Check out the [Jekyll docs][jekyll] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll’s dedicated Help repository][jekyll-help].
+
+[jekyll]:      http://jekyllrb.com
+[jekyll-gh]:   https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+[highlight]:   https://highlightjs.org/
+[lightbox]:    http://lokeshdhakar.com/projects/lightbox2/
+[jekyll-archive]: https://github.com/jekyll/jekyll-archives
+[liquid]: https://github.com/Shopify/liquid/wiki/Liquid-for-Designers
